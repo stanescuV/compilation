@@ -1,0 +1,31 @@
+
+
+I will keep my hands off the code and act strictly as your guide. Here is the roadmap and the exact order of milestones you need to hit to build this in Python.
+
+The Brainfuck Compiler Roadmap
+Milestone 1: Define Your Target
+Before writing any code, you need to decide what your compiler will output. A true "compiler" translates source code into another language or machine code. You need to choose if your Python script will translate Brainfuck into executable C code, assembly language, or simply translate it into a runnable Python script (a transcompiler).
+
+Milestone 2: Lexical Analysis (The Lexer)
+Your first coding task is to read the raw Brainfuck source file and clean it up. Brainfuck ignores any character that isn't one of its eight commands (> < + - . , [ ]). Your lexer should read a string of text and strip out everything else, leaving you with a clean, continuous string or list of valid commands.
+
+Milestone 3: Syntax Analysis and Loop Matching
+This is where you catch errors before trying to compile. You need to scan your cleaned list of commands and ensure that every opening bracket [ has a corresponding closing bracket ], and vice versa.
+
+Hint: A stack data structure (like a standard Python list using append and pop) is the perfect tool for matching these pairs and saving their index locations.
+
+Milestone 4: The Intermediate Representation (IR)
+Instead of translating raw characters directly into your target language, it is best practice to convert them into an internal data structure first. You will map your raw characters to specific instruction objects or dictionaries in Python. For example, a + becomes an "ADD" instruction, and a [ becomes a "JUMP_IF_ZERO" instruction that knows the exact index of its matching ].
+
+Milestone 5: Optimization (Optional but Recommended)
+Brainfuck code is famously repetitive. Before generating the final code, you can write passes over your Intermediate Representation to compress it. If you see five + commands in a row, you can condense that into a single "ADD 5" instruction. If you see [-], you can translate that directly into a "CLEAR TO ZERO" instruction.
+
+Milestone 6: Code Generation
+This is the final phase. You will loop through your Intermediate Representation and output the actual code in your target language (C, Assembly, or Python).
+
+First, generate the setup code: a byte array (the tape) initialized to 30,000 cells, and a data pointer set to the start of the tape.
+
+Second, map your IR instructions to the corresponding lines of code in your target language.
+
+Third, save this generated text into a new file.
+
